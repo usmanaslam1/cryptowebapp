@@ -2,7 +2,7 @@ pipeline {
     agent any   
     environment {
         dockerImage=''
-        registry='usmanaslam/cryptoweb'
+        registry='usmanaslam/cryptowebapp'
         registryCredential='DockerHub'
 
     }
