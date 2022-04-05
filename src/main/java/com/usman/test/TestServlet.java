@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/hello")
 public class TestServlet extends HttpServlet {
 
 	@Override
@@ -16,7 +15,7 @@ public class TestServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		super.doGet(req, resp);
 		
-		resp.getWriter().print("Hello World!");
+		resp.getWriter().print("Hello World! >> This is a test servlet");
 		
 	}
 
@@ -33,6 +32,4 @@ public class TestServlet extends HttpServlet {
 	}
 	
 	
-	
-
 }

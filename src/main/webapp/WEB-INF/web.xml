@@ -3,5 +3,13 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+  <display-name>Vigenere Cipher</display-name>
+  <servlet>
+    <servlet-name>vigenere</servlet-name>
+    <servlet-class>com.usman.test.TestServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>vigenere</servlet-name>
+    <url-pattern>/vigenere</url-pattern>
+  </servlet-mapping>
 </web-app>
