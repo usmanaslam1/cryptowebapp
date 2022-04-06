@@ -61,6 +61,28 @@ pipeline {
                 }
             }
         }
+        
+        
+              //TODO fix this step
+            
+         stage('Deploy container'){
+            
+            steps{
+                
+                script{
+                    
+                     sshagent (credentials: ['AWS_docker']) {
+					    sh 'ssh -o StrictHostKeyChecking=no -l ec2-user 54.176.151.226 sudo docker stop cryptoweb'
+					    sh 'ssh -o StrictHostKeyChecking=no -l ec2-user 54.176.151.226 sudo docker rm cryptoweb'
+					    sh 'ssh -o StrictHostKeyChecking=no -l ec2-user 54.176.151.226 sudo docker pull usmanaslam/cryptowebapp:latest'
+					    sh 'ssh -o StrictHostKeyChecking=no -l ec2-user 54.176.151.226 sudo docker run -d --name cryptoweb -p 8080:8080 usmanaslam/cryptowebapp'
+					    			    
+  					 }
+                }
+                
+            }
+            
+        }
     }
 }
 
