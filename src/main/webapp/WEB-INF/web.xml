@@ -6,10 +6,10 @@
   <display-name>Vigenere Cipher</display-name>
   <servlet>
     <servlet-name>vigenere</servlet-name>
-    <servlet-class>com.usman.test.TestServlet</servlet-class>
+    <servlet-class>com.usman.servlets.VigenereServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>vigenere</servlet-name>
-    <url-pattern>/vigenere</url-pattern>
+    <url-pattern>/vig</url-pattern>
   </servlet-mapping>
 </web-app>

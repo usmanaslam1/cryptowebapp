@@ -13,17 +13,34 @@ pipeline {
     }
 
     stages {
-        stage('Build') {
+    
+    
+    	stage('Checkout') {
+			steps {
+			        echo "++++++++++++++++++++++++++++CHECKOUT++++++++++++++++++++++++++++++++++"
+				checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/usmanaslam75/cryptowebapp']]])
+			}
+		}
+  		stage('SonarQube Analysis') {
+			steps{
+				script{
+  	  				withSonarQubeEnv() {
+			        		echo "++++++++++++++++++++++++++++SONAR QUBE++++++++++++++++++++++++++++++++++"
+      						sh "mvn clean verify sonar:sonar -Dsonar.projectKey=Crypto-Web-Application"
+    					}
+				}
+			}
+  		}
+    
+     	stage('Build') {
             steps {
-                // Get some code from a GitHub repository
-                //git 'https://github.com/usmanaslam75/crypto.git'
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/usmanaslam75/cryptowebapp']]])
-                sh "mvn clean install"
+				echo "++++++++++++++++++++++++++++BUILD++++++++++++++++++++++++++++++++++"
+                sh "mvn clean package"
             }
             post {
                 success {
                     junit '**/target/surefire-reports/TEST-*.xml'
-                    archiveArtifacts 'target/*.war'
+                    archiveArtifacts 'target/*.jar'
                 }
             }
         }
@@ -46,3 +63,4 @@ pipeline {
         }
     }
 }
+

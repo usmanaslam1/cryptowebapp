@@ -1,10 +1,17 @@
 <html>
 <body>
 
-<h1>More changes</h1>
-<h1>Hello World!!!!!</h1>
-<h2>This is my first web application, this will feature functionality to encrypt / decrypt data using Vigenere Cipher</h2>
-<h3> Change1</h3>
+<h1>Vigenere Cipher</h1>
+<br>
+<form action="/vig" method="post">
+
+Enter your text:   <br>  <textarea rows="5" cols="115" name="pt" id="pt"></textarea> <br>
+Enter your key:     <input type=text"  name="kc" size="100" id="kc"> <br>
+Encrypt: <input type="radio" name="op" value="e" id="opButton" checked> Decrypt: <input type="radio" name="op" value="d" id="opButton"><br><br>
+
+<input type="submit" value="submit">
+
+</form>
  
 </body>
 
