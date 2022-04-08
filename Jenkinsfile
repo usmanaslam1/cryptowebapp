@@ -70,10 +70,10 @@ pipeline {
                 script{
                     
                      sshagent (credentials: ['AWS_docker']) {
-					    sh 'ssh -o StrictHostKeyChecking=no -l ec2-user 54.176.151.226 sudo docker stop cryptoweb'
-					    sh 'ssh -o StrictHostKeyChecking=no -l ec2-user 54.176.151.226 sudo docker rm cryptoweb'
-					    sh 'ssh -o StrictHostKeyChecking=no -l ec2-user 54.176.151.226 sudo docker pull usmanaslam/cryptowebapp:latest'
-					    sh 'ssh -o StrictHostKeyChecking=no -l ec2-user 54.176.151.226 sudo docker run -d --name cryptoweb -p 8080:8080 usmanaslam/cryptowebapp'
+					    sh 'ssh -o StrictHostKeyChecking=no -l ec2-user crypto.usman.cloud sudo docker stop cryptowebapp'
+					    sh 'ssh -o StrictHostKeyChecking=no -l ec2-user crypto.usman.cloud sudo docker rm cryptowebapp'
+					    sh 'ssh -o StrictHostKeyChecking=no -l ec2-user crypto.usman.cloud sudo docker pull usmanaslam/cryptowebapp'
+					    sh 'ssh -o StrictHostKeyChecking=no -l ec2-user crypto.usman.cloud sudo docker run -d --name cryptowebapp -p 8080:8080 usmanaslam/cryptowebapp'
 					    			    
   					 }
                 }
