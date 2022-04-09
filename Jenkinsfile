@@ -81,6 +81,13 @@ pipeline {
             }
             
         }
+        
+        stage ("Dynamic Analysis - DAST with OWASP ZAP") {
+			steps {
+				sh "docker run -t owasp/zap2docker-stable zap-baseline.py -t http://crypto.usman.cloud:8080/ || true"
+			}
+		
+		}
     }
 }
 
