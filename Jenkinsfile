@@ -27,7 +27,7 @@ pipeline {
       						sh "mvn clean verify sonar:sonar -Dsonar.projectKey=Crypto-Web-Application"
     					}
 				}
-			}
+			} 
   		}
     
      	stage('Build') {
