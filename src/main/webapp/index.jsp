@@ -1,7 +1,7 @@
 <html>
 <body>
 
-<h1>Vigenere Cipher - Jawad</h1>
+<h1>Vigenere Cipher</h1>
 
 <br>
 <form action="/vig" method="post">
