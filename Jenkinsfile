@@ -94,12 +94,31 @@ pipeline {
         always {
         	echo '++++++++++ POST ALWAYS ++++++++'
         	
+        	
+        	
+        	script {
+                        
+                        cest = TimeZone.getTimeZone("CEST")
+                        def cest = new Date()
+                        println(cest) 
+                        def mailRecipients = 'traveldiariesforu@gmail.com'
+                        def jobName = currentBuild.fullDisplayName
+                        env.Name = Name
+                        env.cest = cest
+                        emailext body: '''${SCRIPT, template="email-html.template"}''',
+                        mimeType: 'text/html',
+                        subject: "[Jenkins] ${jobName}",
+                        to: "${mailRecipients}",
+                        replyTo: "${mailRecipients}"
+                        
+               }
+        	
         	    //env.ForEmailPlugin = env.WORKSPACE
-        		emailext mimeType: 'text/html',
-        		body: '${FILE, path="email-html.template"}', 
-        		recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
-        		[$class: 'RequesterRecipientProvider']],
-        		subject: currentBuild.currentResult + " : " + env.JOB_NAME
+        		//emailext mimeType: 'text/html',
+        		//body: '${FILE, path="email-html.template"}', 
+        		//recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
+        		//[$class: 'RequesterRecipientProvider']],
+        		//subject: currentBuild.currentResult + " : " + env.JOB_NAME
  
         	    
         	}
