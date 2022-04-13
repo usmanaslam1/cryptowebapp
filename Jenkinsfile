@@ -30,7 +30,7 @@ pipeline {
 			} 
   		}*/
     
-     	stage('Build') {
+     /*	stage('Build') {
             steps {
 				echo "++++++++++++++++++++++++++++BUILD++++++++++++++++++++++++++++++++++"
                 sh "mvn clean package"
@@ -38,10 +38,10 @@ pipeline {
             post {
                 success {
                     junit '**/target/surefire-reports/TEST-*.xml'
-                    archiveArtifacts 'target/*.war'
+                 //   archiveArtifacts 'target/*.war'
                 }
             }
-        }
+        }*/
         /*stage('Docker Image') {
             steps {
                 script{
@@ -89,17 +89,6 @@ pipeline {
 		
 		//}
 		
-		stage('Writing html file')
-        {
-        	steps{
-		        sh 'echo "<html>" >> myfile.html'
-       			sh 'echo "<header><title> This is the title</title></header>" >> myfile.html'
-        		sh 'echo "<body> how do you do? </body>" >> myfile.html'
-        		sh 'echo "</html>" >> myfile.html'
-        		sh 'ls -al myfile.html'
-        		sh 'head -1 myfile.html'
-        	}
-        }
     }
     post {
         always {
@@ -107,7 +96,7 @@ pipeline {
         	
         	    //env.ForEmailPlugin = env.WORKSPACE
         		emailext mimeType: 'text/html',
-        		body: '${FILE, path="template.html"}', 
+        		body: '${FILE, path="email-html.template"}', 
         		recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
         		[$class: 'RequesterRecipientProvider']],
         		subject: currentBuild.currentResult + " : " + env.JOB_NAME
