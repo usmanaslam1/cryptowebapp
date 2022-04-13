@@ -30,18 +30,18 @@ pipeline {
 			} 
   		}*/
     
-     /*	stage('Build') {
-            steps {
-				echo "++++++++++++++++++++++++++++BUILD++++++++++++++++++++++++++++++++++"
-                sh "mvn clean package"
-            }
-            post {
-                success {
-                    junit '**/target/surefire-reports/TEST-*.xml'
+     //	stage('Build') {
+       //     steps {
+		//		echo "++++++++++++++++++++++++++++BUILD++++++++++++++++++++++++++++++++++"
+          //      sh "mvn clean package"
+            //}
+            //post {
+              //  success {
+                //    junit '**/target/surefire-reports/TEST-*.xml'
                  //   archiveArtifacts 'target/*.war'
-                }
-            }
-        }*/
+                //}
+            //}
+        //}
         /*stage('Docker Image') {
             steps {
                 script{
