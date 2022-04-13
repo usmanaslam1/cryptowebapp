@@ -100,7 +100,7 @@ pipeline {
                         
         	    env.ForEmailPlugin = env.WORKSPACE
         		emailext mimeType: 'text/html',
-        		body: '${SCRIPT, template="email-html.groovy"}', 
+        		body: '${SCRIPT, template="template.html"}', 
         		recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
         		[$class: 'RequesterRecipientProvider']],
         		subject: currentBuild.currentResult + " : " + env.JOB_NAME
