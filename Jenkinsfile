@@ -19,7 +19,7 @@ pipeline {
 				checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/usmanaslam75/cryptowebapp']]])
 			}
 		}
-  	/*	stage('SonarQube Analysis') {
+  		stage('SonarQube Analysis') {
 			steps{
 				script{
   	  				withSonarQubeEnv() {
@@ -28,20 +28,31 @@ pipeline {
     					}
 				}
 			} 
-  		}*/
+  		}
     
-     //	stage('Build') {
-       //     steps {
-		//		echo "++++++++++++++++++++++++++++BUILD++++++++++++++++++++++++++++++++++"
-          //      sh "mvn clean package"
-            //}
-            //post {
-              //  success {
-                //    junit '**/target/surefire-reports/TEST-*.xml'
-                 //   archiveArtifacts 'target/*.war'
-                //}
-            //}
-        //}
+     stage('Build') {
+            steps {
+				echo "++++++++++++++++++++++++++++BUILD++++++++++++++++++++++++++++++++++"
+                sh "mvn clean package"
+            }
+            post {
+                success {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                    archiveArtifacts 'target/*.war'
+                }
+                
+                failure {
+                        script {                        
+        	    			env.ForEmailPlugin = env.WORKSPACE
+        					emailext mimeType: 'text/html',
+        					body: '${SCRIPT, template="email-html.groovy"}', 
+        					recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
+			        		[$class: 'RequesterRecipientProvider']],
+        					subject: currentBuild.currentResult + " : " + env.JOB_NAME
+               			}
+                }
+            }
+        }
         /*stage('Docker Image') {
             steps {
                 script{
@@ -93,28 +104,11 @@ pipeline {
     post {
         always {
         	echo '++++++++++ POST ALWAYS ++++++++'
-        	
-        	
-        	
-        	script {
-                        
-        	    env.ForEmailPlugin = env.WORKSPACE
-        		emailext mimeType: 'text/html',
-        		body: '${SCRIPT, template="email-html.groovy"}', 
-        		recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
-        		[$class: 'RequesterRecipientProvider']],
-        		subject: currentBuild.currentResult + " : " + env.JOB_NAME
-                       
-               }
-        	
-  
-        	    
-        	}
+        }
         
         success {  
              echo 'This will run only if successful'  
             // emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
-
  //           mail bcc: '', body: "<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: 'usman@usman.uk', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "usman@usman.uk";  
  
         }  
