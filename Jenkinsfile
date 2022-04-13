@@ -94,6 +94,8 @@ pipeline {
         	echo '++++++++++ POST ALWAYS ++++++++'
             //emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
          //  emailext body: '<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'CI STATUS: Project name -> ${env.JOB_NAME}'
+         emailext
+
 
         }
         
