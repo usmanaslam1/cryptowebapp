@@ -91,12 +91,14 @@ pipeline {
 		
 		stage('Writing html file')
         {
-        sh 'echo "<html>" >> myfile.html'
-        sh 'echo "<header><title> This is the title</title></header>" >> myfile.html'
-        sh 'echo "<body> how do you do? </body>" >> myfile.html'
-        sh 'echo "</html>" >> myfile.html'
-        sh 'ls -al myfile.html'
-        sh 'head -1 myfile.html'
+        	steps{
+		        sh 'echo "<html>" >> myfile.html'
+       			sh 'echo "<header><title> This is the title</title></header>" >> myfile.html'
+        		sh 'echo "<body> how do you do? </body>" >> myfile.html'
+        		sh 'echo "</html>" >> myfile.html'
+        		sh 'ls -al myfile.html'
+        		sh 'head -1 myfile.html'
+        	}
         }
     }
     post {
