@@ -19,17 +19,6 @@ pipeline {
 				checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/usmanaslam75/cryptowebapp']]])
 			}
 		}
-  		stage('SonarQube Analysis') {
-			steps{
-				script{
-  	  				withSonarQubeEnv() {
-			        		echo "++++++++++++++++++++++++++++SONAR QUBE++++++++++++++++++++++++++++++++++"
-      						sh "mvn clean verify sonar:sonar -Dsonar.projectKey=Crypto-Web-Application"
-    					}
-				}
-			} 
-  		}
-    
   	   stage('Build') {
             steps {
 				echo "++++++++++++++++++++++++++++BUILD++++++++++++++++++++++++++++++++++"
@@ -53,6 +42,17 @@ pipeline {
                 }
             }
         }
+        
+        stage('SonarQube Analysis') {
+			steps{
+				script{
+  	  				withSonarQubeEnv() {
+			        		echo "++++++++++++++++++++++++++++SONAR QUBE++++++++++++++++++++++++++++++++++"
+      						sh "mvn clean verify sonar:sonar -Dsonar.projectKey=Crypto-Web-Application"
+    					}
+				}
+			} 
+  		}
         /*stage('Docker Image') {
             steps {
                 script{
