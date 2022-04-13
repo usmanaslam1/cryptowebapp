@@ -19,7 +19,7 @@ pipeline {
 				checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/usmanaslam75/cryptowebapp']]])
 			}
 		}
-  		stage('SonarQube Analysis') {
+  	/*	stage('SonarQube Analysis') {
 			steps{
 				script{
   	  				withSonarQubeEnv() {
@@ -28,7 +28,7 @@ pipeline {
     					}
 				}
 			} 
-  		}
+  		}*/
     
      	stage('Build') {
             steps {
@@ -42,7 +42,7 @@ pipeline {
                 }
             }
         }
-        stage('Docker Image') {
+        /*stage('Docker Image') {
             steps {
                 script{
                     dockerImage=docker.build registry
@@ -58,29 +58,29 @@ pipeline {
                     }
                 }
             }
-        }
+        }*/
         
         
               //TODO fix this step
             
-         stage('Deploy container'){
+       //stage('Deploy container'){
             
-            steps{
+         //   steps{
                 
-                script{
+          //     script{
                     
-                     sshagent (credentials: ['AWS_docker']) {
-					    sh 'ssh -o StrictHostKeyChecking=no -l ec2-user crypto.usman.cloud sudo docker stop cryptowebapp'
-					    sh 'ssh -o StrictHostKeyChecking=no -l ec2-user crypto.usman.cloud sudo docker rm cryptowebapp'
-					    sh 'ssh -o StrictHostKeyChecking=no -l ec2-user crypto.usman.cloud sudo docker pull usmanaslam/cryptowebapp'
-					    sh 'ssh -o StrictHostKeyChecking=no -l ec2-user crypto.usman.cloud sudo docker run -d --name cryptowebapp -p 8080:8080 usmanaslam/cryptowebapp'
-					    			    
-  					 }
-                }
+            //         sshagent (credentials: ['AWS_docker']) {
+			//		    sh 'ssh -o StrictHostKeyChecking=no -l ec2-user crypto.usman.cloud sudo docker stop cryptowebapp'
+			//		    sh 'ssh -o StrictHostKeyChecking=no -l ec2-user crypto.usman.cloud sudo docker rm cryptowebapp'
+			//		    sh 'ssh -o StrictHostKeyChecking=no -l ec2-user crypto.usman.cloud sudo docker pull usmanaslam/cryptowebapp'
+			//		    sh 'ssh -o StrictHostKeyChecking=no -l ec2-user crypto.usman.cloud sudo docker run -d --name cryptowebapp -p 8080:8080 usmanaslam/cryptowebapp'
+			//		    			    
+  				//	 }
+              //  }
                 
-            }
+            //}
             
-        }
+        //}
         
         stage ("Dynamic Analysis - DAST with OWASP ZAP") {
 			steps {
@@ -97,6 +97,8 @@ pipeline {
         
         success {  
              echo 'This will run only if successful'  
+             mail bcc: '', body: "<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: 'usman@usman.uk', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "usman@usman.uk";  
+ 
         }  
         failure {  
              mail bcc: '', body: "<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: 'usman@usman.uk', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "usman@usman.uk";  
