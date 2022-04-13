@@ -34,10 +34,10 @@ pipeline {
                         script {                        
         	    			env.ForEmailPlugin = env.WORKSPACE
         					emailext mimeType: 'text/html',
-        					body: "<b>Example</b><br>Project: "+ env.JOB_NAME +" <br>Build Number: "+env.BUILD_NUMBER +" <br> URL de build: "+env.BUILD_URL, 
+        					body: "<b>The following build has failed. Please refer to Jenkins Log</b><br>Project: "+ env.JOB_NAME +" <br>Build Number: "+env.BUILD_NUMBER +" <br> URL de build: "+env.BUILD_URL, 
         					recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
 			        		[$class: 'RequesterRecipientProvider']],
-        					subject: currentBuild.currentResult + " : " + env.JOB_NAME
+        					subject: currentBuild.currentResult + " : " + env.JOB_NAME +"  (Build Number: "+env.BUILD_NUMBER+")"
                			}
                 }
             }
