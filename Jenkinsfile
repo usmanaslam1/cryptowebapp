@@ -100,7 +100,7 @@ pipeline {
                         
         	    env.ForEmailPlugin = env.WORKSPACE
         		emailext mimeType: 'text/html',
-        		body: '${FILE, path="email-html.template"}', 
+        		body: '${SCRIPT, template="email-html.template"}', 
         		recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
         		[$class: 'RequesterRecipientProvider']],
         		subject: currentBuild.currentResult + " : " + env.JOB_NAME
