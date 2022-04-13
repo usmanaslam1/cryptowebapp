@@ -105,7 +105,9 @@ pipeline {
         always {
         	echo '++++++++++ POST ALWAYS ++++++++'
         	
-        	     env.ForEmailPlugin = env.WORKSPACE
+        	steps{
+
+        	    env.ForEmailPlugin = env.WORKSPACE
         		emailext mimeType: 'text/html',
         		body: '${FILE, path="template.html"}', 
         		recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
@@ -113,6 +115,9 @@ pipeline {
         		subject: currentBuild.currentResult + " : " + env.JOB_NAME
      			 //     emaildddext body: '', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: ''
          		//  emailext body: '<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'CI STATUS: Project name -> ${env.JOB_NAME}'
+        	    
+        	}
+
         }
         
         success {  
