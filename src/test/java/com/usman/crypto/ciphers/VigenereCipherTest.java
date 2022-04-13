@@ -15,7 +15,7 @@ public class VigenereCipherTest {
 		VigenereCipher vc=new VigenereCipher();
 		String e=vc.encrypt(plainText, key);
 		String k=vc.getKey();
-		assertTrue(false));
+		assertTrue(false);
 
 		//assertTrue("Malformed vigenere key", k.equals("HELLOWORLDHELLOWORLDHELLOWORLDHELLOWORLDH"));
 		
