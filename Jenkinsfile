@@ -105,7 +105,7 @@ pipeline {
         always {
         	echo '++++++++++ POST ALWAYS ++++++++'
         	
-        	    env.ForEmailPlugin = env.WORKSPACE
+        	    //env.ForEmailPlugin = env.WORKSPACE
         		emailext mimeType: 'text/html',
         		body: '${FILE, path="template.html"}', 
         		recipientProviders: [[$class: 'DevelopersRecipientProvider'], 
