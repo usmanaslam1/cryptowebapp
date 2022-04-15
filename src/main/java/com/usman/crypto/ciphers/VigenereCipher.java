@@ -17,35 +17,41 @@ public class VigenereCipher {
 	
 	
 	//Encrypt
-	public String encrypt(String plainText, String key) {
+	public String encrypt(String plainText, String key) throws VigenereException{
 		return process (key,plainText,OP.ENCRYPT);
 	}
 	
 	//Decrypt
 	
-	public String decrypt(String plainText, String key) {	
+	public String decrypt(String plainText, String key) throws VigenereException{	
 		return process (key,plainText,OP.DECRYPT);
 	}
 
 	
 	//Initialize key, ensure that key legth is same as plaintext length 
-	private void initialize(String vigenreKey, String inputText) {
-
-		vigenreKey=vigenreKey.toUpperCase();
+	private void initialize(String vigenereKey, String inputText) throws VigenereException{		
+		vigenereKey=vigenereKey.toUpperCase();
 		int clearTextLength=inputText.length();
 		vKey = new char[inputText.length()];
 		
 		int idx = 0;
 
 		for (int x = 0; x < clearTextLength; x++) {
-			vKey[x] = vigenreKey.charAt(idx);
-			idx = (idx >= vigenreKey.length() - 1 ? 0 : idx + 1);
+			vKey[x] = vigenereKey.charAt(idx);
+			idx = (idx >= vigenereKey.length() - 1 ? 0 : idx + 1);
 		}
 
 	}
 
 	//Process encryption / decryption requests
-	private String process (String key, String text, OP op) {	
+	private String process (String key, String text, OP op) throws VigenereException {	
+		
+		if(key==null || !key.matches("^[a-zA-Z]*$")) {
+			throw new VigenereException("Invalid Vigenere Key: must not be null and must be alphabets only");
+		}
+
+		if (text==null) return "";
+		
 		text=text.toUpperCase();
 		initialize(key, text);
 		

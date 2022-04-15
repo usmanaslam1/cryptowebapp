@@ -10,7 +10,7 @@
 <br>
 
 
-<form action="/vig" method="get">
+<form action="/vig" method="post">
 
 Enter your text:   <br>  <textarea rows="5" cols="115" name="pt" id="pt"></textarea> <br>
 Enter your key:     <input type=text"  name="kc" size="100" id="kc"> <br>

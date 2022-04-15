@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.usman.crypto.ciphers.VigenereCipher;
+import com.usman.crypto.ciphers.VigenereException;
 
 public class VigenereServlet extends HttpServlet {
 	
@@ -27,10 +28,19 @@ public class VigenereServlet extends HttpServlet {
 		String op=req.getParameter("op");
 		VigenereCipher cipher=new VigenereCipher();
 		
-		String res=(op.equalsIgnoreCase("e")?cipher.encrypt(pt, kc):cipher.decrypt(pt, kc));		
-		String key=cipher.getKey();
-		String r=makeResult(pt,kc,res,key);
-     	resp.getWriter().print(r);
+		String res="";
+		try {
+			res=(op.equalsIgnoreCase("e")?cipher.encrypt(pt, kc):cipher.decrypt(pt, kc));
+			String key=cipher.getKey();
+			String r=makeResult(pt,kc,res,key);
+	     	resp.getWriter().print(r);
+
+		}
+		catch (VigenereException ve) {
+			
+			res=ve.getMessage();
+			resp.sendError(500, ve.getMessage());
+		}
 		
 		
 	}
