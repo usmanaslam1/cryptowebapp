@@ -24,11 +24,12 @@ public class VigenereServlet extends HttpServlet {
 		
 		String pt=req.getParameter("pt");
 		String kc=req.getParameter("kc");
+		String op=req.getParameter("op");
 		VigenereCipher cipher=new VigenereCipher();
-		String ct=cipher.encrypt(pt, kc);
+		
+		String res=(op.equalsIgnoreCase("e")?cipher.encrypt(pt, kc):cipher.decrypt(pt, kc));		
 		String key=cipher.getKey();
-		String r=makeResult(pt,kc,ct,key);
-		System.out.println(r);
+		String r=makeResult(pt,kc,res,key);
      	resp.getWriter().print(r);
 		
 		
