@@ -1,0 +1,18 @@
+FROM amazonlinux
+MAINTAINER usman@usman.uk
+WORKDIR /opt/tomcat
+RUN yum -y update
+RUN yum -y install curl
+RUN yum -y install tar
+RUN amazon-linux-extras install java-openjdk11
+RUN java -version
+RUN curl -o ./tomcat.tar.gz https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.62/bin/apache-tomcat-9.0.62.tar.gz
+RUN tar xvfz tomcat.tar.gz
+RUN mv apache-tomcat-9.0.62/* /opt/tomcat/.
+RUN rm -rf /opt/tomcat/webapps/*
+#RUN yum -y install httpd
+EXPOSE 8080
+CMD ["/opt/tomcat/bin/catalina.sh", "run"]
+#EXPOSE 80
+#CMD ["systemctl", "enable", "httpd"]
+#CMD ["systemctl", "start", "httpd"]
