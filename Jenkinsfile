@@ -59,7 +59,7 @@ pipeline {
                     }
                 }
             }
-        }
+        } 
         
         
               //TODO fix this step
