@@ -5,7 +5,7 @@
 	
 %>
 
-<h1>Vigenere Cipher (Cryptography)</h1>
+<h1>Vigenere Cipher</h1>
 
 <br>
 
