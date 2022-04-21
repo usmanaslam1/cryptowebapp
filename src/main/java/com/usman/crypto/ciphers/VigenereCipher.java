@@ -29,7 +29,7 @@ public class VigenereCipher {
 
 	
 	//Initialize key, ensure that key legth is same as plaintext length 
-	private void initialize(String vigenereKey, String inputText) throws VigenereException{		
+	private void initialize(String vigenereKey, String inputText){		
 		vigenereKey=vigenereKey.toUpperCase();
 		int clearTextLength=inputText.length();
 		vKey = new char[inputText.length()];
