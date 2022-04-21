@@ -119,7 +119,7 @@ public class VigenereCipherTest {
 	@Test
 	public void testDecryption() {
 		// Test Data
-		String key = "complexkey`";
+		String key = "complexkey";
 		String cipherText = "C CJTGH FPQKZ QSU NSODE ZZBB RJS ALDV HMI";
 		String expectedResult = "A QUICK BROWN FOX JUMPS OVER THE LAZY DOG";
 		
