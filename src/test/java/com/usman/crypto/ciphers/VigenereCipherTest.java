@@ -1,6 +1,7 @@
 package com.usman.crypto.ciphers;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
@@ -25,7 +26,7 @@ public class VigenereCipherTest {
 		try {
 			e = vc.encrypt(testPT, testKey);
 			k = vc.getKey();
-			assertTrue("Malformed vigenere key", k.equals(expectedResult));
+			assertEquals("Malformed vigenere key",k, expectedResult);
 		} catch (VigenereException ve) {
 			fail(ve.getMessage());
 		}
@@ -102,8 +103,10 @@ public class VigenereCipherTest {
 
 			e = vc.encrypt(plainText, key);
 			k = vc.getKey();
-			assertTrue("Incorrect CipherText. Expected: " + expectedResult + " >>  Actual Result: " + e,
-					e.equals(expectedResult));
+			
+			assertEquals("Incorrect CipherText. Expected: " + expectedResult + " >>  Actual Result: " + e,e,expectedResult);
+			
+			
 		} catch (VigenereException ve) {
 			fail(ve.getMessage());
 		}
@@ -133,8 +136,9 @@ public class VigenereCipherTest {
 
 			d = vc.decrypt(cipherText, key);
 			k = vc.getKey();
-			assertTrue("Incorrect PlainText. Expected: " + expectedResult + " >>  Actual Result: " + d,
-					d.equals(expectedResult));
+			
+			assertEquals("Incorrect PlainText. Expected: " + expectedResult + " >>  Actual Result: " + d,d, expectedResult);
+			
 		} catch (VigenereException ve) {
 			fail(ve.getMessage());
 		}
